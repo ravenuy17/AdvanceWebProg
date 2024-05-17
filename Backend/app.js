@@ -3,9 +3,10 @@ const connectDB = require("./config/db");
 const mongoose = require("mongoose"); 
 const dotenv = require("dotenv");
 const cors = require("cors");
-dotenv.config({ path: "./config.env" });
+require('dotenv').config()
 const app = express();
 
+dotenv.config()
 
 app.use(cors());
 app.use(express.json({ extended: false, limit: "50mb" }));
@@ -21,11 +22,8 @@ app.use("/api/request", require("./routes/request"));
 
 
 
-
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => console.log(`Server running at ${PORT}`));
-
-mongoose.connect(process.env.mongoURI)
+const PORT = process.env.PORT;
+mongoose.connect(process.env.MONGO_URI)
 .then(()=> {
 
     //listen request
